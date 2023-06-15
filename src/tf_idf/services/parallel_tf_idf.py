@@ -17,7 +17,7 @@ class ParallelTfIdfVectorizer(TfIdfVectorizer):
         self._workers_number = workers_number
 
     def transform(self, texts: np.ndarray, init_document_id: int = 0) -> SparseMatrix:
-        pool = mp.Pool()
+        pool = mp.Pool(self._workers_number)
 
         texts_sub_list = np.array_split(texts, self._workers_number)
 
